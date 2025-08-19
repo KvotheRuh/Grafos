@@ -11,12 +11,15 @@ public class Main {
         grafo.cria_adjacencia(0, 1, 5);
         grafo.cria_adjacencia(0, 2, 2);
         grafo.cria_adjacencia(1, 3, 7);
+        grafo.cria_adjacencia(2, 3, 6);
+        grafo.cria_adjacencia(3, 1, 2);
+        grafo.cria_adjacencia(1, 2, 7);
 
         grafo.imprime();
 
         grafo.adjacentes(0, adj);
 
-        grafo.remove_adjacencia(0,1);
+        grafo.remove_adjacencia(0,2);
 
         grafo.imprime();
 
