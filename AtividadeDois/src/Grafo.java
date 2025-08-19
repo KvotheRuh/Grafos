@@ -28,13 +28,7 @@ public class Grafo {
 
     public void remove_adjacencia(int i, int j) {
         if (i >= 0 && i < vertice && j >= 0 && j < vertice) {
-            Iterator<Aresta> it = lista[i].iterator();
-            while (it.hasNext()) {
-                Aresta a = it.next();
-                if (a.destino == j) {
-                    it.remove();
-                }
-            }
+            lista[i].removeIf(a -> a.destino == j);
         } else{
             System.out.println("Não foi possível remover a adjacencia!!");
         }
