@@ -1,13 +1,12 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-public class Grafo {
+public class ListaAdjacencia {
     List<Aresta>[]lista;
     private String[] rotulo;
     private int vertice;
 
-    public Grafo(int vertice) {
+    public ListaAdjacencia(int vertice) {
         this.vertice = vertice;
         lista = new List[vertice] ;
         rotulo = new String[vertice];
@@ -18,7 +17,7 @@ public class Grafo {
         }
     }
 
-    public void cria_adjacencia(int i, int j, int P) {
+    public void criaAdjacencia(int i, int j, int P) {
         if (i >= 0 && i < vertice && j >= 0 && j < vertice) {
             lista[i].add(new Aresta(j, P));
         } else {
@@ -26,7 +25,7 @@ public class Grafo {
         }
     }
 
-    public void remove_adjacencia(int i, int j) {
+    public void removeAdjacencia(int i, int j) {
         if (i >= 0 && i < vertice && j >= 0 && j < vertice) {
             lista[i].removeIf(a -> a.destino == j);
         } else{
@@ -34,7 +33,7 @@ public class Grafo {
         }
     }
 
-    public void seta_informacao( int i, String V){
+    public void setaInformacao( int i, String V){
         if (i >= 0 && i < vertice){
             rotulo[i] = V;
         } else {

@@ -1,27 +1,63 @@
 public class Main {
     public static void main(String[] args) {
-        Grafo grafo = new Grafo(4);
+        ListaAdjacencia grafoLista = new ListaAdjacencia(4);
         int[] adj = new int[4];
 
-        grafo.seta_informacao(0, "A");
-        grafo.seta_informacao(1, "B");
-        grafo.seta_informacao(2, "C");
-        grafo.seta_informacao(3, "D");
+        grafoLista.setaInformacao(0, "A");
+        grafoLista.setaInformacao(1, "B");
+        grafoLista.setaInformacao(2, "C");
+        grafoLista.setaInformacao(3, "D");
 
-        grafo.cria_adjacencia(0, 1, 5);
-        grafo.cria_adjacencia(0, 2, 2);
-        grafo.cria_adjacencia(1, 3, 7);
-        grafo.cria_adjacencia(2, 3, 6);
-        grafo.cria_adjacencia(3, 1, 2);
-        grafo.cria_adjacencia(1, 2, 7);
+        grafoLista.criaAdjacencia(0, 1, 5);
+        grafoLista.criaAdjacencia(0, 2, 2);
+        grafoLista.criaAdjacencia(1, 3, 7);
+        grafoLista.criaAdjacencia(2, 3, 6);
+        grafoLista.criaAdjacencia(3, 1, 2);
+        grafoLista.criaAdjacencia(1, 2, 7);
 
-        grafo.imprime();
+        grafoLista.imprime();
 
-        grafo.adjacentes(0, adj);
+        grafoLista.adjacentes(0, adj);
 
-        grafo.remove_adjacencia(0,2);
+        grafoLista.removeAdjacencia(0,2);
 
-        grafo.imprime();
+        grafoLista.imprime();
+
+
+
+        MatrizAdjacencia grafoMatriz = new MatrizAdjacencia(4);
+        int[] adjMatriz = new int[4];
+
+        grafoMatriz.setaInformacao(0, "A");
+        grafoMatriz.setaInformacao(1, "B");
+        grafoMatriz.setaInformacao(2, "C");
+        grafoMatriz.setaInformacao(3, "D");
+
+        grafoMatriz.criaAdjacencia(0, 1, 5);
+        grafoMatriz.criaAdjacencia(0, 2, 2);
+        grafoMatriz.criaAdjacencia(1, 3, 7);
+        grafoMatriz.criaAdjacencia(2, 3, 6);
+        grafoMatriz.criaAdjacencia(3, 1, 2);
+        grafoMatriz.criaAdjacencia(1, 2, 7);
+
+        grafoMatriz.imprime();
+
+        grafoMatriz.adjacentes(0, adjMatriz);
+
+        grafoMatriz.removeAdjacencia(0,2);
+
+        grafoMatriz.imprime();
+
+        AlgoritmoWarshall algoritmoWarshall = new AlgoritmoWarshall();
+        boolean[][] fechamento = algoritmoWarshall.fechamento(grafoMatriz);
+        algoritmoWarshall.imprime(fechamento, grafoMatriz);
+
+
+        AlgoritmoDijkstra.dijkstra(grafoMatriz, 0);
+        AlgoritmoDijkstra.imprimeCustoTotal(0, 2);
+
+        AlgoritmoDijkstra.dijkstra(grafoMatriz, 3);
+        AlgoritmoDijkstra.imprimeCustoTotal(3, 2);
 
     }
 }
