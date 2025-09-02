@@ -1,8 +1,9 @@
 public class Aresta {
     int destino;
-    int peso;
+    double peso;
+    Aresta proximo;
 
-    public Aresta(int destino, int peso) {
+    public Aresta(int destino, double peso) {
         this.destino = destino;
         this.peso = peso;
     }

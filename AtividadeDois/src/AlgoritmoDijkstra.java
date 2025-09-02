@@ -1,67 +1,65 @@
 public class AlgoritmoDijkstra {
-    private static int[] caminho;
-    private static double[] distancia;  //
-    private static MatrizAdjacencia grafo;
+    boolean pertence = true;
+    boolean naoPertence = false;
+    int valorInfinito = 999999999;
 
-    public static void dijkstra(MatrizAdjacencia matrizGrafo, int origem) {
-        grafo = matrizGrafo;
-        int matrizDados = matrizGrafo.matriz.length;
-        distancia = new double[matrizDados];   // agora global
-        boolean[] visitado = new boolean[matrizDados];
-        caminho = new int[matrizDados];
+    public double dijkstra(ListaAdjacencia grafo, int origem, int destino){
+        int numeroVertice = grafo.quantidadeVertices;
+        double[] distancia = new double[numeroVertice];
+        boolean[] distanciaPermanente = new boolean[numeroVertice];
+        int[] caminho = new int[numeroVertice];
+        int verticeCorrente;
+        int proximoVertice = origem;
+        double distanciMinima;
+        double menorDistancia;
+        double novaDistancia;
 
-        for(int i = 0; i < matrizDados; i++){
-            distancia[i] = Double.POSITIVE_INFINITY;
-            visitado[i] = false;
+        for (int i = 0; i < numeroVertice; i++){
+            distanciaPermanente[i] = naoPertence;
+            distancia[i] = valorInfinito;
             caminho[i] = -1;
         }
+
+        distanciaPermanente[origem] = pertence;
         distancia[origem] = 0;
+        verticeCorrente = origem;
 
-        for(int contador = 0; contador < matrizDados; contador++){
-            int menorDist = menorDistancia(distancia, visitado);
-            if(menorDist == -1) break;
-            visitado[menorDist] = true;
+        while (verticeCorrente != destino){
+            menorDistancia = valorInfinito;
+            distanciMinima = distancia[verticeCorrente];
 
-            for(int verticeInfo = 0; verticeInfo < matrizDados; verticeInfo++){
-                double peso = matrizGrafo.matriz[menorDist][verticeInfo];
-                if (!visitado[verticeInfo] && peso != Double.POSITIVE_INFINITY
-                        && distancia[menorDist] + peso < distancia[verticeInfo]) {
-                    distancia[verticeInfo] = distancia[menorDist] + peso;
-                    caminho[verticeInfo] = menorDist;
+            Aresta aresta = grafo.vertices[verticeCorrente].inicio;
+            while(aresta != null){
+                int verticeAjacente = aresta.destino;
+                if(!distanciaPermanente[verticeAjacente]){
+                    novaDistancia = distanciMinima + aresta.peso;
+                    if (novaDistancia < distancia[verticeAjacente]){
+                        distancia[verticeAjacente] = novaDistancia;
+                        caminho[verticeAjacente] = verticeCorrente;
+                    }
+                    if (distancia[verticeAjacente] < menorDistancia){
+                        menorDistancia = distancia[verticeAjacente];
+                        proximoVertice = verticeAjacente;
+                    }
                 }
+                aresta = aresta.proximo;
             }
+            verticeCorrente = proximoVertice;
+            distanciaPermanente[verticeCorrente] = pertence;
         }
+
+        System.out.println("Caminho:  ");
+        imprimirCaminho(grafo,caminho,destino);
+
+        System.out.println("\nCusto total: " + distancia[destino]);
+        return distancia[destino];
     }
 
-    private static int menorDistancia(double[] distancia, boolean[] visitado){
-        double menor = Double.POSITIVE_INFINITY;
-        int indice = -1;
-        for(int i = 0; i < distancia.length; i++){
-            if(!visitado[i] && distancia[i] < menor){
-                menor = distancia[i];
-                indice = i;
-            }
+    private void imprimirCaminho(ListaAdjacencia grafo, int[] caminho, int vertice) {
+        if (caminho[vertice] != -1) {
+            imprimirCaminho(grafo, caminho, caminho[vertice]);
+            System.out.print(" -> ");
         }
-        return indice;
-    }
-
-    public static void imprimeCaminho(int origem, int destino) {
-        if (destino == origem) {
-            System.out.print(grafo.rotulo[origem]);
-        } else if (caminho[destino] == -1) {
-            System.out.print("Não há caminho!");
-        } else {
-            imprimeCaminho(origem, caminho[destino]);
-            System.out.print(" -> " + grafo.rotulo[destino]);
-        }
-    }
-
-    public static void imprimeCustoTotal(int origem, int destino) {
-        imprimeCaminho(origem, destino);
-        if (distancia[destino] != Double.POSITIVE_INFINITY) {
-            System.out.println(" ");
-            System.out.print("Custo total = " + distancia[destino]);
-        }
-        System.out.println();
+        System.out.print(grafo.vertices[vertice].rotulo);
     }
 }

@@ -1,42 +1,52 @@
 public class AlgoritmoWarshall {
-    public boolean[][] fechamento(MatrizAdjacencia grafo) {
-        int matrizDados = grafo.matriz.length;
-        boolean[][] fechamento = new boolean[matrizDados][matrizDados];
+    ConverteLista matrizCopia = new ConverteLista();
+    public boolean[][] fechamento(ListaAdjacencia grafo){
+        int numeroVertices = grafo.quantidadeVertices;
+        double[][] matrizDados = matrizCopia.copiarLista(grafo);
+        boolean[][] matrizFechamento = new boolean[numeroVertices][numeroVertices];
 
-        for (int i = 0; i < matrizDados; i++) {
-            for (int j = 0; j < matrizDados; j++) {
-                fechamento[i][j] = (grafo.matriz[i][j] != 0 && grafo.matriz[i][j] != Double.POSITIVE_INFINITY);
-            }
-        }
-
-        for (int k = 0; k < matrizDados; k++) {
-            for (int i = 0; i < matrizDados; i++) {
-                for (int j = 0; j < matrizDados; j++) {
-                    fechamento[i][j] = fechamento[i][j] || (fechamento[i][k] && fechamento[k][j]);
+        for(int i = 0; i < numeroVertices; i++){
+            for (int j = 0; j < numeroVertices; j++){
+                if (i == j){
+                    matrizFechamento[i][j] = true;
+                } else {
+                    matrizFechamento[i][j] =(matrizDados[i][j] != Double.POSITIVE_INFINITY);
                 }
             }
         }
 
-        return fechamento;
+        for (int k = 0; k < numeroVertices; k++){
+            for (int i = 0; i < numeroVertices; i++){
+                for (int j = 0; j < numeroVertices; j++){
+                    matrizFechamento[i][j] = matrizFechamento[i][j] || (matrizFechamento[i][k] && matrizFechamento[k][j]);
+                }
+            }
+        }
+        return matrizFechamento;
     }
 
-    public void imprime(boolean[][] fechamento, MatrizAdjacencia grafo) {
-        int n = fechamento.length;
+    public void imprime(boolean[][] matrizFechamento, ListaAdjacencia grafo) {
         System.out.println("\nMatriz de Alcançabilidade:");
 
-        System.out.print("   ");
-        for (int j = 0; j < n; j++) {
-            System.out.printf("%6s", grafo.rotulo[j]);
+        System.out.printf("%1s", "");
+        for (int j = 0; j < grafo.quantidadeVertices; j++) {
+            System.out.printf("%6s", grafo.vertices[j].rotulo);
         }
         System.out.println();
 
-        for (int i = 0; i < n; i++) {
-            System.out.printf("%3s", grafo.rotulo[i]);
-            for (int j = 0; j < n; j++) {
-                System.out.printf("%6s", fechamento[i][j] ? "1" : "0");
+        for (int i = 0; i < grafo.quantidadeVertices; i++) {
+            System.out.printf("%s", grafo.vertices[i].rotulo);
+
+            for (int j = 0; j < grafo.quantidadeVertices; j++) {
+                if (matrizFechamento[i][j]) {
+                    System.out.printf("%6s", "1");
+                } else {
+                    System.out.printf("%6s", "0");
+                }
             }
             System.out.println();
         }
     }
 
 }
+

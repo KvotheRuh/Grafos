@@ -13,7 +13,6 @@ public class MatrizAdjacencia {
                 this.matriz[i][j] = Double.POSITIVE_INFINITY;
             }
         }
-
     }
 
     public void criaAdjacencia(int i, int j, double P) {
@@ -71,7 +70,7 @@ public class MatrizAdjacencia {
 
             for(int j = 0; j < this.vertice; ++j) {
                 if (this.matriz[i][j] == Double.POSITIVE_INFINITY) {
-                    System.out.printf("%6s", "0.00"); // símbolo de infinito
+                    System.out.printf("%6s", "0.00");
                 } else {
                     System.out.printf("%6.2f", this.matriz[i][j]);
                 }
