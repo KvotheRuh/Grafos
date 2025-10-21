@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ListaAdjacencia {
    public Vertice[] vertices;
@@ -31,6 +28,36 @@ public class ListaAdjacencia {
                atual = atual.proximo;
             }
             atual.proximo = novaAresta;
+         }
+      }
+   }
+
+   public void criaAdjacenciaNaoDirecionada(int inicio, int destino, double peso){
+      if(inicio >= 0 && inicio < quantidadeVertices && destino >= 0 && destino < quantidadeVertices){
+         Vertice origem = vertices[inicio];
+         Aresta novaAresta = new Aresta(destino,peso);
+
+         if(origem.inicio == null){
+            origem.inicio = novaAresta;
+         } else {
+            Aresta atual = origem.inicio;
+            while (atual.proximo != null){
+               atual = atual.proximo;
+            }
+            atual.proximo = novaAresta;
+         }
+
+         Vertice  fim = vertices[destino];
+         Aresta segundaAresta = new Aresta(inicio, peso);
+
+         if (fim.inicio == null){
+            fim.inicio = segundaAresta;
+         } else {
+            Aresta corrente = fim.inicio;
+            while (corrente.proximo != null){
+               corrente = corrente.proximo;
+            }
+            corrente.proximo = segundaAresta;
          }
       }
    }
@@ -318,6 +345,59 @@ public class ListaAdjacencia {
       System.out.println("Destino não encontrado!");
 
       return null;
+   }
+
+   public void Prim(int inicio, int destino) {
+      List<Integer> visitados = new ArrayList<>();
+      List<String> arvore = new ArrayList<>();
+      Map<Aresta, Double> adjacencias = new HashMap<>();
+
+      visitados.add(inicio);
+
+      while (true) {
+         Vertice origem = vertices[inicio];
+         Aresta atual = origem.inicio;
+
+         while (atual != null) {
+            if (!visitados.contains(atual.destino)) {
+               adjacencias.put(atual, atual.peso);
+            }
+            atual = atual.proximo;
+         }
+
+         Map.Entry<Aresta, Double> menor = adjacencias.entrySet()
+                 .stream()
+                 .min(Map.Entry.comparingByValue())
+                 .orElse(null);
+
+
+         Aresta proximoAresta = menor.getKey();
+         int proximoVertice = proximoAresta.destino;
+         double peso = menor.getValue();
+
+         Vertice verticeDestino = vertices[proximoVertice];
+
+         arvore.add(origem.rotulo + " -> " + verticeDestino.rotulo + " (" + peso + ")");
+
+         visitados.add(proximoVertice);
+         adjacencias.remove(proximoAresta);
+
+
+         inicio = proximoVertice;
+
+         if (inicio == destino) {
+            break;
+         }
+
+         if (visitados.size() == vertices.length) {
+            break;
+         }
+      }
+
+      System.out.println("Árvore geradora mínima:");
+      for (String aresta : arvore) {
+         System.out.println(aresta);
+      }
    }
 
    public void imprime() {

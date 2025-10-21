@@ -21,23 +21,32 @@ public class Main {
 
         System.out.println("Lista: ");
 
-        grafoLista.criaAdjacencia(0, 1, 5);
-        grafoLista.criaAdjacencia(0, 2, 2);
-        grafoLista.criaAdjacencia(1, 3, 7);
-        grafoLista.criaAdjacencia(2, 3, 6);
-        grafoLista.criaAdjacencia(3, 1, 2);
-        grafoLista.criaAdjacencia(1, 2, 7);
-        grafoLista.criaAdjacencia(0,3,20);
+//        grafoLista.criaAdjacencia(0, 1, 5);
+//        grafoLista.criaAdjacencia(0, 2, 2);
+//        grafoLista.criaAdjacencia(1, 3, 7);
+//        grafoLista.criaAdjacencia(2, 3, 6);
+//        grafoLista.criaAdjacencia(3, 1, 2);
+//        grafoLista.criaAdjacencia(1, 2, 7);
+//        grafoLista.criaAdjacencia(0,3,20);
 
+        grafoLista.criaAdjacenciaNaoDirecionada(0, 1, 5);
+        grafoLista.criaAdjacenciaNaoDirecionada(0, 2, 2);
+        grafoLista.criaAdjacenciaNaoDirecionada(1, 3, 7);
+        grafoLista.criaAdjacenciaNaoDirecionada(2, 3, 6);
+        grafoLista.criaAdjacenciaNaoDirecionada(1, 2, 7);
+        grafoLista.criaAdjacenciaNaoDirecionada(0,3,20);
 
+        grafoLista.Prim(0,3);
+
+        System.out.println("\nLista: ");
         grafoLista.imprime();
-        grafoLista.profundidade(0,3,visitadosPilha);
-        grafoLista.largura(fila,0,3,visitadosLargura);
-        grafoLista.distancia(0, 2, visitadosDistancia);
-        grafoLista.saida();
-
-        grafoLista.adjacentes(0, adj);
-        grafoLista.entrada();
+//        grafoLista.profundidade(0,3,visitadosPilha);
+//        grafoLista.largura(fila,0,3,visitadosLargura);
+//        grafoLista.distancia(0, 2, visitadosDistancia);
+//        grafoLista.saida();
+//
+//        grafoLista.adjacentes(0, adj);
+//        grafoLista.entrada();
 
 
 
