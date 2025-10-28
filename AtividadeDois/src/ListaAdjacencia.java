@@ -350,7 +350,8 @@ public class ListaAdjacencia {
    public void Prim(int inicio, int destino) {
       List<Integer> visitados = new ArrayList<>();
       List<String> arvore = new ArrayList<>();
-      Map<Aresta, Double> adjacencias = new HashMap<>();
+      Map<Aresta, List<Object>> adjacencias = new HashMap<>();
+
 
       visitados.add(inicio);
 
@@ -360,24 +361,29 @@ public class ListaAdjacencia {
 
          while (atual != null) {
             if (!visitados.contains(atual.destino)) {
-               adjacencias.put(atual, atual.peso);
+               List<Object> arestas = new ArrayList<>();
+               arestas.add(origem);
+               arestas.add(atual.destino);
+               arestas.add(atual.peso);
+               adjacencias.put(atual, arestas);
             }
             atual = atual.proximo;
          }
 
-         Map.Entry<Aresta, Double> menor = adjacencias.entrySet()
+         Map.Entry<Aresta, List<Object>> menor = adjacencias.entrySet()
                  .stream()
-                 .min(Map.Entry.comparingByValue())
+                 .min(Comparator.comparingDouble(e -> (double) e.getValue().get(2)))
                  .orElse(null);
 
 
          Aresta proximoAresta = menor.getKey();
-         int proximoVertice = proximoAresta.destino;
-         double peso = menor.getValue();
+         Vertice verticeInicio = (Vertice) menor.getValue().get(0);
+         int proximoVertice = (int) menor.getValue().get(1);
+         double peso = (double) menor.getValue().get(2);
 
          Vertice verticeDestino = vertices[proximoVertice];
 
-         arvore.add(origem.rotulo + " -> " + verticeDestino.rotulo + " (" + peso + ")");
+         arvore.add(verticeInicio.rotulo + " -> " + verticeDestino.rotulo + " (" + peso + ")");
 
          visitados.add(proximoVertice);
          adjacencias.remove(proximoAresta);
