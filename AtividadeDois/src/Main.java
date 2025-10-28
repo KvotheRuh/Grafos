@@ -3,15 +3,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        ListaAdjacencia grafoLista = new ListaAdjacencia(4);
-        MatrizAdjacencia grafoMatriz = new MatrizAdjacencia(4);
-        int[] adjMatriz = new int[4];
-        int[] adj =  new int[4];
+        ListaAdjacencia grafoLista = new ListaAdjacencia(7);
+        MatrizAdjacencia grafoMatriz = new MatrizAdjacencia(7);
+        int[] adjMatriz = new int[7];
+        int[] adj =  new int[7];
         List<Integer> visitadosDistancia = new ArrayList<>();
         List<Integer> visitadosPilha = new ArrayList<>();
         List<Integer> visitadosLargura = new ArrayList<>();
         Fila fila = new Fila();
-        String[] rotulos = new String[]{"A","B","C","D"};
+        String[] rotulos = new String[]{"A","B","C","D","E","F","G"};
 
         for (int i = 0; i < rotulos.length; i++){
             grafoLista.setaInformacao(i, rotulos[i]);
@@ -35,8 +35,15 @@ public class Main {
         grafoLista.criaAdjacenciaNaoDirecionada(2, 3, 6);
         grafoLista.criaAdjacenciaNaoDirecionada(1, 2, 7);
         grafoLista.criaAdjacenciaNaoDirecionada(0,3,20);
+        grafoLista.criaAdjacenciaNaoDirecionada(4, 5, 6);
+        grafoLista.criaAdjacenciaNaoDirecionada(5, 6, 7);
+        grafoLista.criaAdjacenciaNaoDirecionada(6,4,20);
 
         grafoLista.Prim(0,3);
+
+        grafoLista.conexo(grafoLista);
+
+        grafoLista.encontraComponente();
 
         System.out.println("\nLista: ");
         grafoLista.imprime();

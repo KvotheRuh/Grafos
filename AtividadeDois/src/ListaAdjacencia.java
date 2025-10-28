@@ -406,6 +406,56 @@ public class ListaAdjacencia {
       }
    }
 
+   public void buscaComponente(int inicio, List<Integer> componentes, List<Integer> visitados) {
+      visitados.add(inicio);
+      componentes.add(inicio);
+
+      Vertice origem = vertices[inicio];
+      Aresta atual = origem.inicio;
+
+      while (atual != null) {
+         if (!visitados.contains(atual.destino)) {
+            buscaComponente(atual.destino, componentes, visitados);
+         }
+
+         atual = atual.proximo;
+      }
+   }
+
+   public int encontraComponente() {
+      List<Integer> visitados = new ArrayList<>();
+      int contadorComponentes = 0;
+
+      for (int i = 0; i < quantidadeVertices; i++) {
+         if (!visitados.contains(i) && vertices[i] != null) {
+            List<Integer> componentes = new ArrayList<>();
+            buscaComponente(i, componentes,visitados);
+
+            System.out.print("Componente " + contadorComponentes + ": ");
+            for (int j = 0; j < componentes.size(); j++) {
+               System.out.print(vertices[componentes.get(j)].rotulo);
+               if (j < componentes.size() - 1) System.out.print(", ");
+            }
+            System.out.println();
+            contadorComponentes++;
+         }
+      }
+      System.out.println("Total de componentes no Grafo: " +  contadorComponentes);
+      System.out.println();
+      return contadorComponentes;
+   }
+
+   public void conexo (ListaAdjacencia grafo) {
+      int numeroComponentes = grafo.encontraComponente();
+
+      if(numeroComponentes == 1) {
+         System.out.println("O grafo é conexo!!!");
+      } else {
+         System.out.println("O grafo não é conexo!!");
+      }
+
+   }
+
    public void imprime() {
       for (int i = 0; i < quantidadeVertices; i++) {
          Vertice origem = vertices[i];
