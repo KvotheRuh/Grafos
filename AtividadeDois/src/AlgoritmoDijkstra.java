@@ -1,21 +1,20 @@
 public class AlgoritmoDijkstra {
     boolean pertence = true;
-    boolean naoPertence = false;
     int valorInfinito = 999999999;
 
     public double dijkstra(ListaAdjacencia grafo, int origem, int destino){
-        int numeroVertice = grafo.quantidadeVertices;
-        double[] distancia = new double[numeroVertice];
-        boolean[] distanciaPermanente = new boolean[numeroVertice];
-        int[] caminho = new int[numeroVertice];
+        int qtdVertices = grafo.quantidadeVertices;
+        double[] distancia = new double[qtdVertices];
+        boolean[] distanciaPermanente = new boolean[qtdVertices];
+        int[] caminho = new int[qtdVertices];
         int verticeCorrente;
         int proximoVertice = origem;
         double distanciMinima;
         double menorDistancia;
         double novaDistancia;
 
-        for (int i = 0; i < numeroVertice; i++){
-            distanciaPermanente[i] = naoPertence;
+        for (int i = 0; i < qtdVertices; i++){
+            distanciaPermanente[i] = false;
             distancia[i] = valorInfinito;
             caminho[i] = -1;
         }
@@ -29,21 +28,35 @@ public class AlgoritmoDijkstra {
             distanciMinima = distancia[verticeCorrente];
 
             Aresta aresta = grafo.vertices[verticeCorrente].inicio;
+
             while(aresta != null){
-                int verticeAjacente = aresta.destino;
-                if(!distanciaPermanente[verticeAjacente]){
+                int adjacente = aresta.destino;
+
+                if(!distanciaPermanente[adjacente]){
                     novaDistancia = distanciMinima + aresta.peso;
-                    if (novaDistancia < distancia[verticeAjacente]){
-                        distancia[verticeAjacente] = novaDistancia;
-                        caminho[verticeAjacente] = verticeCorrente;
+
+                    if (novaDistancia < distancia[adjacente]){
+                        distancia[adjacente] = novaDistancia;
+                        caminho[adjacente] = verticeCorrente;
                     }
-                    if (distancia[verticeAjacente] < menorDistancia){
-                        menorDistancia = distancia[verticeAjacente];
-                        proximoVertice = verticeAjacente;
+
+                    if (distancia[adjacente] < menorDistancia){
+                        menorDistancia = distancia[adjacente];
+                        proximoVertice = adjacente;
                     }
                 }
+
                 aresta = aresta.proximo;
+
             }
+
+            for(int i = 0; i < qtdVertices ; i++){
+                if (!distanciaPermanente[i] && distancia[i] < menorDistancia){
+                    menorDistancia = distancia[i];
+                    proximoVertice = i;
+                }
+            }
+
             verticeCorrente = proximoVertice;
             distanciaPermanente[verticeCorrente] = pertence;
         }
