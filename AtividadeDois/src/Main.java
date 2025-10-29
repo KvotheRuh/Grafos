@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -38,15 +39,30 @@ public class Main {
         grafoLista.criaAdjacenciaNaoDirecionada(4, 5, 6);
         grafoLista.criaAdjacenciaNaoDirecionada(5, 6, 7);
         grafoLista.criaAdjacenciaNaoDirecionada(6,4,20);
-
-        grafoLista.Prim(0,3);
-
-        grafoLista.conexo(grafoLista);
-
-        grafoLista.encontraComponente();
+        grafoLista.criaAdjacenciaNaoDirecionada(0,6,10);
+        grafoLista.criaAdjacenciaNaoDirecionada(1,6,40);
 
         System.out.println("\nLista: ");
         grafoLista.imprime();
+
+        grafoLista.Prim(0,3);
+
+
+        grafoLista.encontraComponente();
+
+        grafoLista.conexo(grafoLista);
+
+        List<Integer> clique = Arrays.asList(0,1,6);
+
+        boolean cliques = grafoLista.ehClique(clique);
+
+        if (cliques){
+            System.out.println("É clique!!");
+        } else {
+            System.out.println("Não é clique!!");
+        }
+
+
 //        grafoLista.profundidade(0,3,visitadosPilha);
 //        grafoLista.largura(fila,0,3,visitadosLargura);
 //        grafoLista.distancia(0, 2, visitadosDistancia);

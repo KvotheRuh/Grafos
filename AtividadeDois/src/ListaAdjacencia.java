@@ -429,9 +429,9 @@ public class ListaAdjacencia {
       for (int i = 0; i < quantidadeVertices; i++) {
          if (!visitados.contains(i) && vertices[i] != null) {
             List<Integer> componentes = new ArrayList<>();
-            buscaComponente(i, componentes,visitados);
+            buscaComponente(i,  componentes,visitados);
 
-            System.out.print("Componente " + contadorComponentes + ": ");
+            System.out.print("\nComponente " + contadorComponentes + ": ");
             for (int j = 0; j < componentes.size(); j++) {
                System.out.print(vertices[componentes.get(j)].rotulo);
                if (j < componentes.size() - 1) System.out.print(", ");
@@ -445,15 +445,61 @@ public class ListaAdjacencia {
       return contadorComponentes;
    }
 
-   public void conexo (ListaAdjacencia grafo) {
-      int numeroComponentes = grafo.encontraComponente();
 
-      if(numeroComponentes == 1) {
+   public void conexo (ListaAdjacencia grafo) {
+      List<Integer> visitados = new ArrayList<>();
+      int contadorComponentes = 0;
+
+      for (int i = 0; i < quantidadeVertices; i++) {
+         if (!visitados.contains(i) && vertices[i] != null) {
+            List<Integer> componentes = new ArrayList<>();
+            buscaComponente(i,  componentes,visitados);
+
+            contadorComponentes++;
+         }
+      }
+
+      if(contadorComponentes == 1) {
          System.out.println("O grafo é conexo!!!");
       } else {
          System.out.println("O grafo não é conexo!!");
       }
+      System.out.println(" ");
 
+   }
+
+   public boolean ehClique(List<Integer> listaVertices) {
+      List<Integer> adj = new ArrayList<>();
+      for(int i = 0; i < listaVertices.size(); i++){
+        int verticeCorrente = listaVertices.get(i);
+
+        Vertice origem = vertices[verticeCorrente];
+        Aresta atual = origem.inicio;
+
+        adj.clear();
+
+        for (int j = i + 1; j < listaVertices.size(); j ++){
+           int verticeSeguinte = listaVertices.get(j);
+
+           while (atual != null){
+              adj.add(atual.destino);
+              atual = atual.proximo;
+           }
+
+           if (!adj.contains(verticeSeguinte)) {
+              return false;
+           }
+        }
+      }
+      return true;
+   }
+
+   public boolean ehMaximal(List<Integer> listaVertices, ListaAdjacencia grafo){
+//    Pegar os vertices do grafo que não pertencem a lista que esta senod verificada e conferir se
+//      com esse vertices forma um novo clique. Se formar retorna falso.
+
+
+      return false;
    }
 
    public void imprime() {
