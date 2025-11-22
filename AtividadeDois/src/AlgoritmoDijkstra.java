@@ -57,6 +57,12 @@ public class AlgoritmoDijkstra {
                 }
             }
 
+
+            if (menorDistancia == valorInfinito) {
+                System.out.println("Destino não alcançável a partir de " + grafo.vertices[origem].rotulo);
+                return valorInfinito;
+            }
+
             verticeCorrente = proximoVertice;
             distanciaPermanente[verticeCorrente] = pertence;
         }

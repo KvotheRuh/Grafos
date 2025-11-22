@@ -12,6 +12,7 @@ public class Main {
         List<Integer> visitadosPilha = new ArrayList<>();
         List<Integer> visitadosLargura = new ArrayList<>();
         Fila fila = new Fila();
+        AlgoritmoDijkstra algoritmoDijkstra = new AlgoritmoDijkstra();
         String[] rotulos = new String[]{"A","B","C","D","E","F","G"};
 
         for (int i = 0; i < rotulos.length; i++){
@@ -43,12 +44,13 @@ public class Main {
         grafoLista.criaAdjacenciaNaoDirecionada(1,6,40);
         grafoLista.criaAdjacenciaNaoDirecionada(2,4,10);
         grafoLista.criaAdjacenciaNaoDirecionada(3,5,10);
+        grafoLista.criaAdjacenciaNaoDirecionada(6, 4, 7);
 
 
         System.out.println("\nLista: ");
         grafoLista.imprime();
 
-        grafoLista.Prim(0,3);
+        grafoLista.Prim(0,2);
 
 
         grafoLista.encontraComponente();
@@ -78,6 +80,9 @@ public class Main {
         } else {
             System.out.println("O grafo não é Euleriano!!");
         }
+
+        grafoLista.encontraCiclo();
+        grafoLista.calcularProximidade(grafoLista);
 
 
 //        grafoLista.profundidade(0,3,visitadosPilha);
@@ -113,9 +118,6 @@ public class Main {
 //        algoritmoWarshall.imprime(fechamento, grafoLista);
 
 
-//       AlgoritmoDijkstra algoritmoDijkstra = new AlgoritmoDijkstra();
-//       algoritmoDijkstra.dijkstra(grafoLista, 0, 3);
-
-
+//       algoritmoDijkstra.dijkstra(grafoLista, 0,6);
     }
 }

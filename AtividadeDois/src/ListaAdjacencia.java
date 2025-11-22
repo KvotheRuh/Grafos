@@ -251,7 +251,6 @@ public class ListaAdjacencia {
 
 
    public List<Integer> profundidade(int inicio, int destino, List<Integer> visitados) {
-
       visitados.add(inicio);
 
       System.out.println("Pilha: " + visitados);
@@ -549,7 +548,86 @@ public class ListaAdjacencia {
       return false;
    }
 
-   public void imprime() {
+    public boolean profundidadeCiclo(int inicio, List<Integer> visitados) {
+        visitados.add(inicio);
+
+        Vertice origem = vertices[inicio];
+        Aresta atual = origem.inicio;
+
+        while (atual != null) {
+            if (visitados.contains(atual.destino) && visitados.size() > 1) {
+                int ultimo = visitados.get(visitados.size() - 2);
+                if (atual.destino != ultimo) {
+                    return true;
+                }
+            }
+
+            if (!visitados.contains(atual.destino)) {
+                boolean encontrouCiclo = profundidadeCiclo(atual.destino, visitados);
+                if (encontrouCiclo) {
+                    return true;
+                }
+            }
+
+            atual = atual.proximo;
+        }
+
+        visitados.remove(visitados.size() - 1);
+
+        return false;
+    }
+
+    public void encontraCiclo() {
+        for (int i = 0; i < quantidadeVertices; i++) {
+            if (vertices[i] != null) {
+
+                List<Integer> visitados = new ArrayList<>();
+
+                boolean ciclo = profundidadeCiclo(i, visitados);
+
+                if (ciclo) {
+                    System.out.println("O grafo é ciclico!");
+                    return;
+                }
+            }
+        }
+
+        System.out.println("O grafo não é cíclico!");
+    }
+
+    public double proximidade (ListaAdjacencia grafo, int inicio) {
+       AlgoritmoDijkstra dijkstra = new AlgoritmoDijkstra();
+       double soma = 0;
+
+       for (int i = 0; i < grafo.quantidadeVertices; i++){
+           double distancias = dijkstra.dijkstra(grafo, inicio, i);
+
+           if (distancias != dijkstra.valorInfinito){
+               soma += distancias;
+           }
+       }
+
+       if(soma == 0){
+           return 0;
+       }
+
+       double centralidade = 1/soma;
+
+       return centralidade;
+    }
+
+    public void calcularProximidade(ListaAdjacencia grafo){
+       for (int i = 0; i < quantidadeVertices; i++){
+           double proximidade = proximidade(grafo, i);
+           System.out.printf("\nVértice proximidade %s: %.3f\n", grafo.vertices[i].rotulo, proximidade);
+       }
+    }
+
+
+
+
+
+    public void imprime() {
       for (int i = 0; i < quantidadeVertices; i++) {
          Vertice origem = vertices[i];
          if (origem != null) {
