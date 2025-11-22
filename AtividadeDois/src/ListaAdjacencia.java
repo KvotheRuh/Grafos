@@ -446,7 +446,7 @@ public class ListaAdjacencia {
    }
 
 
-   public void conexo (ListaAdjacencia grafo) {
+   public boolean conexo () {
       List<Integer> visitados = new ArrayList<>();
       int contadorComponentes = 0;
 
@@ -459,12 +459,11 @@ public class ListaAdjacencia {
          }
       }
 
-      if(contadorComponentes == 1) {
-         System.out.println("O grafo é conexo!!!");
-      } else {
-         System.out.println("O grafo não é conexo!!");
+      if (contadorComponentes != 1) {
+         return false;
       }
-      System.out.println(" ");
+
+      return true;
 
    }
 
@@ -495,9 +494,57 @@ public class ListaAdjacencia {
    }
 
    public boolean ehMaximal(List<Integer> listaVertices, ListaAdjacencia grafo){
-//    Pegar os vertices do grafo que não pertencem a lista que esta senod verificada e conferir se
+//    Pegar os vertices do grafo que não pertencem a lista que esta sendo verificada e conferir se
 //      com esse vertices forma um novo clique. Se formar retorna falso.
 
+
+      return false;
+   }
+
+   public void calcularGrau (Map<String, Integer> contadorGrau) {
+
+      for (int i = 0; i < quantidadeVertices; i++) {
+         Vertice origem = vertices[i];
+         int contador = 0;
+
+         if (origem != null) {
+            Aresta atual = origem.inicio;
+
+            if (atual == null) {
+               contadorGrau.put(origem.rotulo,contador);
+               continue;
+            }
+
+            while (atual != null) {
+               contador++;
+               contadorGrau.put(origem.rotulo, contador);
+               atual = atual.proximo;
+
+            }
+         }
+      }
+   }
+
+   public boolean ehEuleriano() {
+      Map<String, Integer> contadorGrau = new HashMap<>();
+      int contadorImpares = 0;
+      boolean ehConexo = conexo();
+
+      if(!ehConexo){
+         return false;
+      }
+
+      calcularGrau(contadorGrau);
+
+      for (Map.Entry<String, Integer> entry : contadorGrau.entrySet()) {
+         if(entry.getValue() % 2 != 0){
+            contadorImpares ++;
+         }
+      }
+
+      if (contadorImpares == 2 || contadorImpares == 0){
+         return true;
+      }
 
       return false;
    }

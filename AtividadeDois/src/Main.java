@@ -41,6 +41,9 @@ public class Main {
         grafoLista.criaAdjacenciaNaoDirecionada(6,4,20);
         grafoLista.criaAdjacenciaNaoDirecionada(0,6,10);
         grafoLista.criaAdjacenciaNaoDirecionada(1,6,40);
+        grafoLista.criaAdjacenciaNaoDirecionada(2,4,10);
+        grafoLista.criaAdjacenciaNaoDirecionada(3,5,10);
+
 
         System.out.println("\nLista: ");
         grafoLista.imprime();
@@ -50,7 +53,13 @@ public class Main {
 
         grafoLista.encontraComponente();
 
-        grafoLista.conexo(grafoLista);
+        boolean ehConexo = grafoLista.conexo();
+
+        if (ehConexo){
+            System.out.println("O grafo é conexo!!");
+        } else {
+            System.out.println("O grafo não é conexo!!");
+        }
 
         List<Integer> clique = Arrays.asList(0,1,6);
 
@@ -60,6 +69,14 @@ public class Main {
             System.out.println("É clique!!");
         } else {
             System.out.println("Não é clique!!");
+        }
+
+        boolean ehEuleriano = grafoLista.ehEuleriano();
+
+        if (ehEuleriano){
+            System.out.println("O grafo é Euleriano!!");
+        } else {
+            System.out.println("O grafo não é Euleriano!!");
         }
 
 
