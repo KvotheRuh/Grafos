@@ -67,10 +67,11 @@ public class AlgoritmoDijkstra {
             distanciaPermanente[verticeCorrente] = pertence;
         }
 
-        System.out.println("Caminho:  ");
-        imprimirCaminho(grafo,caminho,destino);
+//        System.out.println("Caminho:  ");
+//        imprimirCaminho(grafo,caminho,destino);
+//
+//        System.out.println("\nCusto total: " + distancia[destino]);
 
-        System.out.println("\nCusto total: " + distancia[destino]);
         return distancia[destino];
     }
 
@@ -80,5 +81,61 @@ public class AlgoritmoDijkstra {
             System.out.print(" -> ");
         }
         System.out.print(grafo.vertices[vertice].rotulo);
+    }
+
+    public int[] dijkstraCentralidade (ListaAdjacencia grafo, int origem) {
+        int qtdVertices = grafo.quantidadeVertices;
+        double[] distancia = new double[qtdVertices];
+        boolean[] distanciaPermanente = new boolean[qtdVertices];
+        int[] caminho = new int[qtdVertices];
+        int verticeCorrente;
+        double menorDistancia;
+        double novaDistancia;
+
+        for (int i = 0; i < qtdVertices; i++){
+            distanciaPermanente[i] = false;
+            distancia[i] = valorInfinito;
+            caminho[i] = -1;
+        }
+
+        distancia[origem] = 0;
+
+        for(int i = 0; i < qtdVertices - 1; i++){
+
+            menorDistancia = valorInfinito;
+            verticeCorrente = -1;
+
+            for (int j = 0; j < qtdVertices; j++){
+                if (!distanciaPermanente[j] && distancia[j] < menorDistancia){
+                    menorDistancia = distancia[j];
+                    verticeCorrente = j;
+                }
+            }
+
+            if (verticeCorrente == -1){
+                break;
+            }
+
+            distanciaPermanente[verticeCorrente] = pertence;
+
+            Aresta atual = grafo.vertices[verticeCorrente].inicio;
+
+            while (atual != null) {
+                int adjacente = atual.destino;
+
+                if (!distanciaPermanente[adjacente]) {
+                    novaDistancia = distancia[verticeCorrente] + atual.peso;
+
+                    if (novaDistancia < distancia[adjacente]) {
+                        distancia[adjacente] = novaDistancia;
+                        caminho[adjacente] = verticeCorrente;
+                    }
+                }
+
+                atual = atual.proximo;
+            }
+        }
+
+        return caminho;
     }
 }

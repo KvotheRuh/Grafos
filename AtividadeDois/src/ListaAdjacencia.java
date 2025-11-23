@@ -617,13 +617,55 @@ public class ListaAdjacencia {
     }
 
     public void calcularProximidade(ListaAdjacencia grafo){
+       System.out.println(" ");
        for (int i = 0; i < quantidadeVertices; i++){
            double proximidade = proximidade(grafo, i);
-           System.out.printf("\nVértice proximidade %s: %.3f\n", grafo.vertices[i].rotulo, proximidade);
+           System.out.printf("Vértice proximidade %s: %.4f\n", grafo.vertices[i].rotulo, proximidade);
        }
+        System.out.println(" ");
     }
 
 
+    public void intermedicao(ListaAdjacencia grafo) {
+       AlgoritmoDijkstra dijkstra = new AlgoritmoDijkstra();
+       double[] intermediacao = new double[quantidadeVertices];
+
+
+       for(int i = 0; i < quantidadeVertices; i++){
+           intermediacao[i] = 0;
+       }
+
+       for (int origem = 0; origem < quantidadeVertices; origem++) {
+           if (vertices[origem] == null) {
+               continue;
+           }
+
+           int[] caminhos = dijkstra.dijkstraCentralidade(grafo, origem);
+
+           for(int destino = 0; destino < quantidadeVertices; destino++){
+
+               if(origem == destino || vertices[destino] == null){
+                   continue;
+               }
+
+               int caminhoAtual = caminhos[destino];
+
+               while(caminhoAtual != -1 && caminhoAtual != origem){
+                   intermediacao[caminhoAtual]++;
+                   caminhoAtual = caminhos[caminhoAtual];
+               }
+           }
+       }
+
+       System.out.println(" ");
+       for (int j = 0; j < quantidadeVertices; j++){
+           if(vertices[j] != null) {
+               double calculoIntermediacao = 2 * (intermediacao[j] / ((quantidadeVertices - 1) * (quantidadeVertices - 2)));
+               System.out.printf("Vértice Intermediação %s: %.4f\n", vertices[j].rotulo, calculoIntermediacao);
+           }
+       }
+       System.out.println(" ");
+    }
 
 
 

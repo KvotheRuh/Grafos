@@ -82,7 +82,10 @@ public class Main {
         }
 
         grafoLista.encontraCiclo();
+        
         grafoLista.calcularProximidade(grafoLista);
+
+        grafoLista.intermedicao(grafoLista);
 
 
 //        grafoLista.profundidade(0,3,visitadosPilha);
@@ -116,8 +119,5 @@ public class Main {
 //        AlgoritmoWarshall algoritmoWarshall = new AlgoritmoWarshall();
 //        boolean[][] fechamento = algoritmoWarshall.fechamento(grafoLista);
 //        algoritmoWarshall.imprime(fechamento, grafoLista);
-
-
-//       algoritmoDijkstra.dijkstra(grafoLista, 0,6);
     }
 }
