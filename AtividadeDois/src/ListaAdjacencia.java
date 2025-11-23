@@ -492,12 +492,19 @@ public class ListaAdjacencia {
       return true;
    }
 
-   public boolean ehMaximal(List<Integer> listaVertices, ListaAdjacencia grafo){
-//    Pegar os vertices do grafo que não pertencem a lista que esta sendo verificada e conferir se
-//      com esse vertices forma um novo clique. Se formar retorna falso.
+   public boolean ehMaximal(List<Integer> listaVertices){
 
+       for(int i = 0; i < quantidadeVertices; i++) {
+           if (!listaVertices.contains(i)) {
+               List<Integer> testeMaximal = new ArrayList<>(listaVertices);
+               testeMaximal.add(i);
 
-      return false;
+               if (ehClique(testeMaximal)){
+                   return false;
+               }
+           }
+       }
+      return true;
    }
 
    public void calcularGrau (Map<String, Integer> contadorGrau) {

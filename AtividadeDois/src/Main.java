@@ -45,6 +45,8 @@ public class Main {
         grafoLista.criaAdjacenciaNaoDirecionada(2,4,10);
         grafoLista.criaAdjacenciaNaoDirecionada(3,5,10);
         grafoLista.criaAdjacenciaNaoDirecionada(6, 4, 7);
+        grafoLista.criaAdjacenciaNaoDirecionada(3, 4, 10);
+        grafoLista.criaAdjacenciaNaoDirecionada(3, 6, 8);
 
 
         System.out.println("\nLista: ");
@@ -73,6 +75,16 @@ public class Main {
             System.out.println("Não é clique!!");
         }
 
+        List<Integer> listaMaximal= Arrays.asList(0,1,6);
+
+        boolean maximal = grafoLista.ehMaximal(listaMaximal);
+
+        if (maximal){
+            System.out.println("O clique é maximal!!");
+        } else {
+            System.out.println("O clique não é maximal!!");
+        }
+
         boolean ehEuleriano = grafoLista.ehEuleriano();
 
         if (ehEuleriano){
@@ -81,8 +93,10 @@ public class Main {
             System.out.println("O grafo não é Euleriano!!");
         }
 
+
+
         grafoLista.encontraCiclo();
-        
+
         grafoLista.calcularProximidade(grafoLista);
 
         grafoLista.intermedicao(grafoLista);
