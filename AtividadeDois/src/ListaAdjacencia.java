@@ -493,6 +493,9 @@ public class ListaAdjacencia {
    }
 
    public boolean ehMaximal(List<Integer> listaVertices){
+       if (!ehClique(listaVertices)) {
+           return false;
+       }
 
        for(int i = 0; i < quantidadeVertices; i++) {
            if (!listaVertices.contains(i)) {
