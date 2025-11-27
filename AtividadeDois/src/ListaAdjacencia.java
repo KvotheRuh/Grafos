@@ -417,7 +417,7 @@ public class ListaAdjacencia {
             buscaComponente(atual.destino, componentes, visitados);
          }
 
-         atual = atual.proximo;
+          atual = atual.proximo;
       }
    }
 
@@ -426,7 +426,7 @@ public class ListaAdjacencia {
       int contadorComponentes = 0;
 
       for (int i = 0; i < quantidadeVertices; i++) {
-         if (!visitados.contains(i) && vertices[i] != null) {
+         if (!visitados.contains(i)) {
             List<Integer> componentes = new ArrayList<>();
             buscaComponente(i,  componentes,visitados);
 
@@ -450,7 +450,7 @@ public class ListaAdjacencia {
       int contadorComponentes = 0;
 
       for (int i = 0; i < quantidadeVertices; i++) {
-         if (!visitados.contains(i) && vertices[i] != null) {
+         if (!visitados.contains(i)) {
             List<Integer> componentes = new ArrayList<>();
             buscaComponente(i,  componentes,visitados);
 
@@ -516,17 +516,12 @@ public class ListaAdjacencia {
          if (origem != null) {
             Aresta atual = origem.inicio;
 
-            if (atual == null) {
-               contadorGrau.put(origem.rotulo,contador);
-               continue;
-            }
-
             while (atual != null) {
                contador++;
-               contadorGrau.put(origem.rotulo, contador);
                atual = atual.proximo;
 
             }
+           contadorGrau.put(origem.rotulo, contador);
          }
       }
    }
@@ -667,7 +662,8 @@ public class ListaAdjacencia {
        System.out.println(" ");
        for (int j = 0; j < quantidadeVertices; j++){
            if(vertices[j] != null) {
-               double calculoIntermediacao = 2 * (intermediacao[j] / ((quantidadeVertices - 1) * (quantidadeVertices - 2)));
+               double valor = intermediacao[j] / 2;
+               double calculoIntermediacao = 2 * (valor / ((quantidadeVertices - 1) * (quantidadeVertices - 2)));
                System.out.printf("Vértice Intermediação %s: %.4f\n", vertices[j].rotulo, calculoIntermediacao);
            }
        }
