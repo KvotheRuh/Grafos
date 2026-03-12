@@ -399,7 +399,7 @@ public class ListaAdjacencia {
          }
       }
 
-      System.out.println("Árvore geradora mínima:");
+      System.out.println("\nÁrvore geradora mínima:");
       for (String aresta : arvore) {
          System.out.println(aresta);
       }
