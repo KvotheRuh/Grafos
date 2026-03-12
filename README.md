@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Grafos
-Atividades de Grafos
-=======
 # Biblioteca de Grafos
 
 ### Desenvolvido por: Carlos Eduardo Nogueira Morciani
@@ -82,9 +78,9 @@ Por fim, recomendo que em caso de rodar um grafo grande remova os prints dos mé
 ## Como executar
 ```text
     - git clone https://github.com/KvotheRuh/Grafos.git
-    - Abrir a IDE da sua escolha
-    - Executar o arquivo Main
 ```
+  - Abrir a IDE da sua escolha
+  - Executar o arquivo Main
 
 ## Exemplo
 ```java
@@ -103,5 +99,3 @@ grafoLista.criaAdjacenciaNaoDirecionada(0, 1, 5);
 
 ## Tecnologias
 - Java
-
->>>>>>> master
