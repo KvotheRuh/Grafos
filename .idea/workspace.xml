@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="513c3120-88f8-4288-bba6-35715c8f5d89" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/Grafos.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/AlgoritmoDijkstra.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/AlgoritmoWarshall.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/Aresta.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/ConverteLista.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/Fila.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/ListaAdjacencia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/MatrizAdjacencia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BibliotecaGrafos/src/Vertice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grafos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Grafos.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="3BI1UBfpq7NOqIs5MrTy84u93NZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="513c3120-88f8-4288-bba6-35715c8f5d89" name="Changes" comment="" />
+      <created>1774161784970</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774161784970</updated>
+    </task>
+    <servers />
+  </component>
+</project>
